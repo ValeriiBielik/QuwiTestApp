@@ -1,6 +1,8 @@
 package com.bielik.quwitestapp.base;
 
-public class BaseViewModel<T extends BaseView> {
+import androidx.lifecycle.ViewModel;
+
+public class BaseViewModel<T extends BaseView> extends ViewModel {
 
     public T view;
 

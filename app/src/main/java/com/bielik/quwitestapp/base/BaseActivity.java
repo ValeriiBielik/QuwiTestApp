@@ -6,16 +6,16 @@ import androidx.databinding.ViewDataBinding;
 
 public abstract class BaseActivity<B extends ViewDataBinding, T extends BaseViewModel> extends AppCompatActivity {
 
-    protected B dataBinding;
-    protected T baseViewModel;
+    protected B binding;
+    protected T viewModel;
 
     protected void bindView(int layoutId) {
-        dataBinding = DataBindingUtil.setContentView(this, layoutId);
+        binding = DataBindingUtil.setContentView(this, layoutId);
     }
 
     @Override
     protected void onDestroy() {
-        baseViewModel.detachView();
+        viewModel.detachView();
         super.onDestroy();
     }
 }

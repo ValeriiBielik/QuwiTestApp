@@ -1,5 +1,5 @@
 package com.bielik.quwitestapp.base;
 
 public interface BaseView {
-    void OnError(Throwable throwable);
+    void onError(String err);
 }
