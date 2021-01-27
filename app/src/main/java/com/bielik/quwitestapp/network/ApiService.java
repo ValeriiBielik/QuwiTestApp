@@ -7,8 +7,6 @@ import com.bielik.quwitestapp.network.response.ProjectResponse;
 import com.bielik.quwitestapp.network.response.TicketsResponse;
 import com.bielik.quwitestapp.network.util.ApiResponse;
 
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -29,5 +27,5 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("projects-manage/update")
-    Call<Response<Object>> updateProjectName(@Query("id") long id, @Field("name") String newName);
+    LiveData<ApiResponse<Object>> editProjectName(@Query("id") long id, @Field("name") String newName);
 }

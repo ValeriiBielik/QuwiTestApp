@@ -14,4 +14,13 @@
     <!-- Tickets Activity-->
     <string name="ticket_created_by">%1$s by %2$s</string>
     <string name="no_tickets">No Tickets</string>
+    <string name="tickets">Tickets</string>
+    <string name="edit_project_name">Edit project name</string>
+
+    <!-- EditProjectNameDialog-->
+
+    <string name="project_name_changed">Project name successfully changed</string>
+    <string name="value_empty">Value is empty</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
 </resources>
