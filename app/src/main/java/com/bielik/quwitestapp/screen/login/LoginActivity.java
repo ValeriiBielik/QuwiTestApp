@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.bielik.quwitestapp.R;
 import com.bielik.quwitestapp.base.BaseActivity;
 import com.bielik.quwitestapp.databinding.ActivityLoginBinding;
@@ -24,7 +26,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     private void initViewModel() {
-        viewModel = new LoginViewModel();
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.attachView(this);
     }
 

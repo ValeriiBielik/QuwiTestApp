@@ -3,6 +3,7 @@ package com.bielik.quwitestapp.network;
 import androidx.lifecycle.LiveData;
 
 import com.bielik.quwitestapp.network.response.LoginResponse;
+import com.bielik.quwitestapp.network.response.ProjectResponse;
 import com.bielik.quwitestapp.network.util.ApiResponse;
 
 import retrofit2.Call;
@@ -19,11 +20,8 @@ public interface ApiService {
     @POST("auth/login")
     LiveData<ApiResponse<LoginResponse>> login(@Field("email") String email, @Field("password") String password);
 
-    @POST("auth/logout")
-    Call<Response<Object>> logout();
-
     @GET("projects-manage/index")
-    Call<Response<Object>> getProjects();
+    LiveData<ApiResponse<ProjectResponse>> getProjects();
 
     @FormUrlEncoded
     @POST("projects-manage/update")

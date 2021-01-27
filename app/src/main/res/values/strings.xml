@@ -7,4 +7,7 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="validation_error">Validation Error</string>
+
+    <!-- Projects Activity-->
+    <string name="no_projects">No Projects</string>
 </resources>
