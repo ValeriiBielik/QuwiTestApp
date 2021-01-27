@@ -10,4 +10,8 @@
 
     <!-- Projects Activity-->
     <string name="no_projects">No Projects</string>
+
+    <!-- Tickets Activity-->
+    <string name="ticket_created_by">%1$s by %2$s</string>
+    <string name="no_tickets">No Tickets</string>
 </resources>

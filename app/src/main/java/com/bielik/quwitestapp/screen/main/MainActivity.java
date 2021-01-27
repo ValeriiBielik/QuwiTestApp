@@ -3,6 +3,7 @@ package com.bielik.quwitestapp.screen.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -14,10 +15,12 @@ import com.bielik.quwitestapp.adapter.ProjectsAdapter;
 import com.bielik.quwitestapp.base.BaseActivity;
 import com.bielik.quwitestapp.databinding.ActivityMainBinding;
 import com.bielik.quwitestapp.model.Project;
+import com.bielik.quwitestapp.screen.project_info.TicketsActivity;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel>
         implements MainActivityView, ProjectsAdapter.OnProjectClickListener {
 
+    private static final String TAG = "MainActivity";
     private ProjectsAdapter projectsAdapter;
 
     public static void start(Context context) {
@@ -32,7 +35,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         bindView(R.layout.activity_main);
 
         init();
-
     }
 
     @Override
@@ -64,17 +66,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void OnDataLoad(String items) {
-
-    }
-
-    @Override
     public void onError(String err) {
-
+        Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
+        Log.e(TAG, err);
     }
 
     @Override
     public void onProjectClick(Project project) {
-
+        TicketsActivity.start(this, project);
     }
 }

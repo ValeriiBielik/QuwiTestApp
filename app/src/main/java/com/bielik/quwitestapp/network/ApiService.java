@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.bielik.quwitestapp.network.response.LoginResponse;
 import com.bielik.quwitestapp.network.response.ProjectResponse;
+import com.bielik.quwitestapp.network.response.TicketsResponse;
 import com.bielik.quwitestapp.network.util.ApiResponse;
 
 import retrofit2.Call;
@@ -22,6 +23,9 @@ public interface ApiService {
 
     @GET("projects-manage/index")
     LiveData<ApiResponse<ProjectResponse>> getProjects();
+
+    @GET("issues?")
+    LiveData<ApiResponse<TicketsResponse>> getTickets(@Query("filters[id_project]") long id);
 
     @FormUrlEncoded
     @POST("projects-manage/update")

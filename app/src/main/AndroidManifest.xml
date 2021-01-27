@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuwiTestApp">
+        <activity android:name=".screen.project_info.TicketsActivity"></activity>
         <activity android:name=".screen.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
