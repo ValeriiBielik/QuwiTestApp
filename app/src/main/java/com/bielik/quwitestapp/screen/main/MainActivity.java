@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onResume() {
         super.onResume();
+        showLoader();
         viewModel.loadProjects();
     }
 
@@ -66,7 +67,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
+    public void onSuccess() {
+        hideLoader();
+    }
+
+    @Override
     public void onError(String err) {
+        hideLoader();
         Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
         Log.e(TAG, err);
     }

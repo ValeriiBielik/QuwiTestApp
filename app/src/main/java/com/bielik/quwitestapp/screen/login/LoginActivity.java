@@ -39,6 +39,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     private void initListeners() {
         binding.btnLogin.setOnClickListener(v -> {
+            showLoader();
             hideErrors();
             viewModel.validateCredentials(binding.etEmail.getText(), binding.etPassword.getText());
         });
@@ -46,11 +47,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void onEmailValidationError() {
+        hideLoader();
         binding.etlEmail.setError(getString(R.string.email_validation_error));
     }
 
     @Override
     public void onPasswordValidationError() {
+        hideLoader();
         binding.etlPassword.setError(getString(R.string.password_validation_error));
     }
 
@@ -61,6 +64,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void onUserLoggedIn() {
+        hideLoader();
         MainActivity.start(this);
         finish();
     }
@@ -72,6 +76,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void onError(String err) {
+        hideLoader();
         Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
         Log.e(TAG, err);
     }

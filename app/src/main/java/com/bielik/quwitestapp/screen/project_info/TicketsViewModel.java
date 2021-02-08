@@ -43,6 +43,7 @@ public class TicketsViewModel extends BaseViewModel<TicketsActivityView> {
             if (response.isSuccessful() && response.code == HTTP_OK) {
                 if (response.body != null) {
                     ticketsLiveData.setValue(response.body.getTickets());
+                    view.onSuccess();
                     return;
                 }
             }

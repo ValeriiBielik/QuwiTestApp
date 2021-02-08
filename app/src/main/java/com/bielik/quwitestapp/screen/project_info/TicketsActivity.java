@@ -114,12 +114,19 @@ public class TicketsActivity extends BaseActivity<ActivityTicketsBinding, Ticket
     @Override
     protected void onResume() {
         super.onResume();
+        showLoader();
         viewModel.loadTickets();
     }
 
     @Override
     public void onError(String err) {
+        hideLoader();
         Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
         Log.e(TAG, err);
+    }
+
+    @Override
+    public void onSuccess() {
+        hideLoader();
     }
 }

@@ -25,6 +25,7 @@ public class MainViewModel extends BaseViewModel<MainActivityView> {
             if (response.isSuccessful() && response.code == HTTP_OK) {
                 if (response.body != null) {
                     projectsLiveData.setValue(response.body.getProjects());
+                    view.onSuccess();
                     return;
                 }
             }
