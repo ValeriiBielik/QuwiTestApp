@@ -12,20 +12,32 @@ public class EditProjectNameViewModel extends BaseViewModel<EditProjectNameDialo
 
     private final ApiService api = RetrofitService.getApi();
     private long projectId;
+    private String currentProjectName;
 
     public void setProjectId(long projectId) {
         this.projectId = projectId;
+    }
+
+    public String getCurrentProjectName() {
+        return currentProjectName;
+    }
+
+    public void setCurrentProjectName(String currentProjectName) {
+        this.currentProjectName = currentProjectName;
     }
 
     public void editProjectName(CharSequence name) {
         if (TextUtils.isEmpty(name)) {
             view.onProjectNameEmpty();
             return;
+        } else if (name.toString().equals(currentProjectName)) {
+            view.onProjectNameNotChanged();
+            return;
         }
         api.editProjectName(projectId, name.toString()).observeForever(response -> {
             if (response.isSuccessful() && response.code == HTTP_OK) {
                 if (response.body != null) {
-                    view.onProjectNameEdited();
+                    view.onProjectNameEdited(name.toString());
                     return;
                 }
             }

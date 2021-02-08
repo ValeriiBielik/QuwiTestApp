@@ -26,6 +26,14 @@ public class TicketsViewModel extends BaseViewModel<TicketsActivityView> {
         return project.getId();
     }
 
+    public String getProjectName() {
+        return project.getName();
+    }
+
+    public void setProjectName(String newName) {
+        project.setName(newName);
+    }
+
     public MutableLiveData<List<Ticket>> getTicketsLiveData() {
         return ticketsLiveData;
     }

@@ -22,6 +22,7 @@
 
     <string name="project_name_changed">Project name successfully changed</string>
     <string name="value_empty">Value is empty</string>
+    <string name="project_name_not_changed">Project name was not changed</string>
     <string name="change">Change</string>
     <string name="cancel">Cancel</string>
 </resources>

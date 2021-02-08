@@ -20,16 +20,23 @@ public class EditProjectNameDialog extends DialogFragment implements EditProject
 
     public static final String TAG = "EditProjectNameDialog";
     private static final String EXTRA_PROJECT_ID = "project_id";
+    private static final String EXTRA_PROJECT_NAME = "project_name";
 
     private EditProjectNameViewModel viewModel;
     private DialogEditProjectNameBinding binding;
+    private OnProjectNameChangedListener onProjectNameChangedListener;
 
-    public static EditProjectNameDialog newInstance(long projectId) {
+    public static EditProjectNameDialog newInstance(long projectId, String projectName) {
         Bundle args = new Bundle();
         args.putLong(EXTRA_PROJECT_ID, projectId);
+        args.putString(EXTRA_PROJECT_NAME, projectName);
         EditProjectNameDialog fragment = new EditProjectNameDialog();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void setOnProjectNameChangedListener(OnProjectNameChangedListener onProjectNameChangedListener) {
+        this.onProjectNameChangedListener = onProjectNameChangedListener;
     }
 
     @Override
@@ -47,6 +54,7 @@ public class EditProjectNameDialog extends DialogFragment implements EditProject
     private void getData() {
         if (getArguments() != null) {
             viewModel.setProjectId(getArguments().getLong(EXTRA_PROJECT_ID));
+            viewModel.setCurrentProjectName(getArguments().getString(EXTRA_PROJECT_NAME));
         }
     }
 
@@ -60,19 +68,26 @@ public class EditProjectNameDialog extends DialogFragment implements EditProject
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.etName.setText(viewModel.getCurrentProjectName());
         binding.btnCancel.setOnClickListener(v -> dismiss());
         binding.btnChange.setOnClickListener(v -> viewModel.editProjectName(binding.etName.getText()));
     }
 
     @Override
-    public void onProjectNameEdited() {
+    public void onProjectNameEdited(String newName) {
         Toast.makeText(requireActivity(), getString(R.string.project_name_changed), Toast.LENGTH_SHORT).show();
+        onProjectNameChangedListener.onProjectNameChanged(newName);
         dismiss();
     }
 
     @Override
     public void onProjectNameEmpty() {
         Toast.makeText(requireActivity(), getString(R.string.value_empty), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProjectNameNotChanged() {
+        Toast.makeText(requireActivity(), getString(R.string.project_name_not_changed), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -87,7 +102,7 @@ public class EditProjectNameDialog extends DialogFragment implements EditProject
         WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        getDialog().getWindow().setAttributes((WindowManager.LayoutParams) params);
+        getDialog().getWindow().setAttributes(params);
     }
 
     @Override

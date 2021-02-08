@@ -49,9 +49,14 @@ public class TicketsActivity extends BaseActivity<ActivityTicketsBinding, Ticket
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     private void getData() {
         if (getIntent() != null) {
             viewModel.setProject(getIntent().getParcelableExtra(EXTRA_PROJECT));
+            setActionBarTitle(viewModel.getProjectName());
         }
     }
 
@@ -98,7 +103,11 @@ public class TicketsActivity extends BaseActivity<ActivityTicketsBinding, Ticket
     }
 
     private void editProjectName() {
-        EditProjectNameDialog dialog = EditProjectNameDialog.newInstance(viewModel.getProjectId());
+        EditProjectNameDialog dialog = EditProjectNameDialog.newInstance(viewModel.getProjectId(), viewModel.getProjectName());
+        dialog.setOnProjectNameChangedListener(newName -> {
+            viewModel.setProjectName(newName);
+            setActionBarTitle(newName);
+        });
         dialog.show(getSupportFragmentManager(), EditProjectNameDialog.TAG);
     }
 

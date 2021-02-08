@@ -4,6 +4,7 @@ import com.bielik.quwitestapp.base.BaseView;
 
 public interface EditProjectNameDialogView extends BaseView {
 
-    void onProjectNameEdited();
+    void onProjectNameEdited(String newName);
     void onProjectNameEmpty();
+    void onProjectNameNotChanged();
 }
