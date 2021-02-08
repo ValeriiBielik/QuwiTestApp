@@ -1,5 +1,7 @@
 package com.bielik.quwitestapp.screen.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +17,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     private static final String TAG = "LoginActivity";
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, LoginActivity.class);
+        starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(starter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +30,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
         initViewModel();
         initListeners();
-        checkIsLoggedIn();
     }
 
     private void initViewModel() {
@@ -37,20 +44,14 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         });
     }
 
-    private void checkIsLoggedIn() {
-        if (viewModel.checkIsLoggedIn()) {
-            onUserLoggedIn();
-        }
-    }
-
     @Override
     public void onEmailValidationError() {
-        binding.etlEmail.setError(getString(R.string.validation_error));
+        binding.etlEmail.setError(getString(R.string.email_validation_error));
     }
 
     @Override
     public void onPasswordValidationError() {
-        binding.etlPassword.setError(getString(R.string.validation_error));
+        binding.etlPassword.setError(getString(R.string.password_validation_error));
     }
 
     @Override
@@ -61,6 +62,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void onUserLoggedIn() {
         MainActivity.start(this);
+        finish();
     }
 
     private void hideErrors() {

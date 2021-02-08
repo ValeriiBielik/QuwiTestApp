@@ -7,6 +7,7 @@ import android.util.Patterns;
 import com.bielik.quwitestapp.base.BaseViewModel;
 import com.bielik.quwitestapp.network.ApiService;
 import com.bielik.quwitestapp.network.RetrofitService;
+import com.bielik.quwitestapp.network.response.ErrorResponse;
 import com.bielik.quwitestapp.util.PreferencesManager;
 
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -35,12 +36,8 @@ public class LoginViewModel extends BaseViewModel<LoginActivityView> {
                 }
             }
             if (response.errorMessage != null) {
-                view.onError(response.errorMessage);
+                view.onError(ErrorResponse.parseLoginError(response.errorMessage));
             }
         });
-    }
-
-    public boolean checkIsLoggedIn() {
-        return !PreferencesManager.getInstance().getToken().isEmpty();
     }
 }

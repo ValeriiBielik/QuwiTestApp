@@ -6,7 +6,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
-    <string name="validation_error">Validation Error</string>
+    <string name="email_validation_error">Enter valid email</string>
+    <string name="password_validation_error">Enter password</string>
 
     <!-- Projects Activity-->
     <string name="no_projects">No Projects</string>
